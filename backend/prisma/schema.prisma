@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+enum Role{
+  GENERALMANAGER
+  USER
+  ADMIN
+  EDITOR
+  WRITER
+}
+
+enum Status{
+  UNSEEN
+  SEEN
+  ANSWERED
+  CLOSED
+}
+
+model User{
+  id Int @id @default(autoincrement())
+  username String
+  email String @unique
+  password String
+  phoneNumber String? @unique
+  role Role[] @default([USER])
+  img String?
+  refresh_token String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ticketsSystem  TicketSystem[] @relation("User")
+  adminTicket TicketSystem[] @relation("admin")
+  
+}
+
+model TicketSystem{
+  id Int @id @default(autoincrement())
+  user User @relation(fields: [userId],references: [id],name: "User")
+  userId Int 
+  admin User? @relation(fields: [adminId],references: [id], name: "admin")
+  adminId Int?
+  status Status @default(UNSEEN)
+  title String
+  section Role @default(EDITOR)
+  message Json[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+
+}

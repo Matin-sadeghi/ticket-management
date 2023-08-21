@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ebeeef;
+}
+
+.loginBtnInRegister {
+  font-size: 13px;
+  line-height: 1.4;
+  color: #999999;
+  text-decoration: none;
+  display: block;
+}
+.loginBtnInRegister:hover {
+  color: #57b846;
+}
+.AuthBtn {
+  background-color: #57b846 !important;
+  border-radius: 25px !important;
+  height: 50px;
+  width: 80% !important;
+  padding: 0px 20px;
+  color: white;
+  transition: all 0.4s;
+}
+.AuthBtn:hover{
+  background-color: #333333 !important;
+
+}
+
+
